@@ -1,5 +1,6 @@
 package sima.cameron.geomessaging.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,8 +33,18 @@ public class Message {
     private Set<Comment> comments;
 
     @JoinColumn(name="AUTHOR_KEY")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
+    @JsonBackReference
     private User user;
+
+    public Message(){}
+
+    public Message(Date created, String body, Set<Comment> comments, long userId) {
+        this.created = created;
+        this.body = body;
+        this.comments = comments;
+        this.user = new User(userId);
+    }
 
     public String getBody() {
         return body;

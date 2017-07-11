@@ -22,7 +22,7 @@ public class MessageController {
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<Message> getMessage(@PathVariable Long id) {
         Message message = messageRepository.findOne(id);
-        return new ResponseEntity<Message>(message, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @RequestMapping(value="/new", method=RequestMethod.POST)
