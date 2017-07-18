@@ -1,5 +1,6 @@
 package sima.cameron.geomessaging.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -25,15 +26,16 @@ public class Comment {
     @Column(name="BODY")
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="MESSAGE", nullable = false)
+    @JsonBackReference
     private Message message;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name="PARENT_COMMENT")
     private Comment parentComment;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name="AUTHOR", nullable = false)
     private User author;
 

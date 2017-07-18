@@ -1,6 +1,7 @@
 package sima.cameron.geomessaging.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,6 +31,7 @@ public class Message {
 
     @Column(name="COMMENTS")
     @OneToMany(cascade = CascadeType.ALL, mappedBy="message")
+    @JsonManagedReference
     private Set<Comment> comments;
 
     @JoinColumn(name="AUTHOR_KEY")
